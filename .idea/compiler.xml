@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="MovieRatingAPI" target="9" />
+      <module name="MovieRatingAPI" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
