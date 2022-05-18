@@ -9,10 +9,5 @@ public class Main {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
-
-		//Conexion a DB
-		MovieDbConnection conn = new MovieDbConnection();
-		conn.connect();
 	}
-
 }
