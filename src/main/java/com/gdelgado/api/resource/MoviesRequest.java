@@ -1,13 +1,6 @@
-package com.gdelgado.api.model;
+package com.gdelgado.api.resource;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document("Movies")
-public class Movie {
-
-    @Id
-    private String id;
+public class MoviesRequest {
 
     private String name;
 
@@ -15,21 +8,13 @@ public class Movie {
 
     private String comments;
 
-    public Movie() {
+    public MoviesRequest() {
     }
 
-    public Movie(String name, int ranking, String comments) {
+    public MoviesRequest(String name, int ranking, String comments) {
         this.name = name;
         this.ranking = ranking;
         this.comments = comments;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -45,9 +30,7 @@ public class Movie {
     }
 
     public void setRanking(int ranking) {
-        if (ranking <= 10) {
-            this.ranking = ranking;
-        }else throw new java.lang.Error("Error, user inserted raking more than 10");
+        this.ranking = ranking;
     }
 
     public String getComments() {
