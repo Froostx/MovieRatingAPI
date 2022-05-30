@@ -10,4 +10,6 @@ public interface MoviesRepository extends MongoRepository<Movie, String> {
     @Query("{'name': ?0}")
     Optional<Movie> findByName(String name);
 
+    Boolean existsByName(String name);
+
 }

@@ -1,11 +1,13 @@
 package com.gdelgado.api.controller;
 
 import com.gdelgado.api.model.Movie;
+import com.gdelgado.api.repository.MoviesRepository;
 import com.gdelgado.api.services.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,9 +17,14 @@ public class MovieController {
 
     private final MovieService movieService;
 
+    @Autowired
+    private MoviesRepository moviesRepository;
+
     @PostMapping
-    public ResponseEntity addMovie(@RequestBody Movie movie) {
-        movieService.addMovie(movie);
+    public ResponseEntity addMovie(@RequestBody @Valid Movie movie) {
+        if(moviesRepository.existsByName(movie.getName())){
+            movieService.updateMovie(movie);
+        }
         //Http status 201 = Created
         return ResponseEntity.status(201).build();
     }

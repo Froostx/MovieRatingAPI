@@ -9,6 +9,9 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,15 +24,9 @@ public class Movie {
     @Indexed(unique = true)
     @Field("name")
     private String name;
+    @Max(value = 10, message = "Ranking should not be more than 10")
     @Field("ranking")
     private int ranking;
     @Field("comments")
     private String comments;
 }
-
-
-    //public void setRanking(int ranking) {
-      //  if (ranking <= 10) {
-        //    this.ranking = ranking;
-       // }else throw new java.lang.Error("Error, user inserted raking more than 10");
-    //}
