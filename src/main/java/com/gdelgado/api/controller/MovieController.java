@@ -1,61 +1,49 @@
 package com.gdelgado.api.controller;
 
 import com.gdelgado.api.model.Movie;
-import com.gdelgado.api.repository.MoviesRepository;
-import com.gdelgado.api.resource.MoviesRequest;
+import com.gdelgado.api.services.MovieService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@RequestMapping("/RankingMovies/api")
+@RequiredArgsConstructor
 public class MovieController {
 
-    private final MoviesRepository moviesRepository;
+    private final MovieService movieService;
 
-    public MovieController(MoviesRepository moviesRepository) {
-        this.moviesRepository = moviesRepository;
+    @PostMapping
+    public ResponseEntity addMovie(@RequestBody Movie movie) {
+        movieService.addMovie(movie);
+        //Http status 201 = Created
+        return ResponseEntity.status(201).build();
     }
 
-    @GetMapping("/movies")
+    @PutMapping
+    public ResponseEntity updateMovie(@RequestBody Movie movie) {
+        movieService.updateMovie(movie);
+        //Http status 200 = Ok
+        return ResponseEntity.status(200).build();
+    }
+
+    @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies() {
-        return ResponseEntity.ok(this.moviesRepository.findAll());
+        return ResponseEntity.ok(movieService.getAllMovies());
     }
 
-    @PostMapping("/movies")
-    public ResponseEntity<Movie> createMovie (@RequestBody MoviesRequest moviesRequest) {
-
-        Movie movie = new Movie();
-        movie.setName(moviesRequest.getName());
-        movie.setRanking(moviesRequest.getRanking());
-        movie.setComments(moviesRequest.getComments());
-
-        return ResponseEntity.status(201).body(this.moviesRepository.save(movie));
+    @GetMapping("/{name}")
+    public ResponseEntity<Movie> getMovieByName(@PathVariable String name) {
+        return ResponseEntity.ok(movieService.getMovieByName(name));
     }
 
-    @GetMapping("/movies/{id}")
-    public ResponseEntity getMovieById(@PathVariable String id) {
-
-        Optional<Movie> movieMapping = this.moviesRepository.findById(id);
-
-        if(movieMapping.isPresent()) {
-            return ResponseEntity.ok(movieMapping.get());
-        } else {
-            return ResponseEntity.ok("The movie with id: " + id + " was not found.");
-        }
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteMovie(@PathVariable String id) {
+        movieService.deleteMovie(id);
+        //Http status 204 = NO_CONTENT
+        return ResponseEntity.status(204).build();
     }
 
-    @DeleteMapping("/movies/{id}")
-    public ResponseEntity deleteMovieById(@PathVariable String id) {
-
-        Optional<Movie> movieDelete = this.moviesRepository.findById(id);
-
-        if(movieDelete.isPresent()) {
-            this.moviesRepository.deleteById(id);
-            return ResponseEntity.ok("Movie deleted successfully");
-        } else {
-            return ResponseEntity.ok("The movie with id: " + id + " was not found.");
-        }
-    }
 }
