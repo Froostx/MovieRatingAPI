@@ -1,4 +1,4 @@
-package com.gdelgado.api.restConfig;
+package com.gdelgado.api.doc;
 
 
 import org.springframework.context.annotation.Bean;
