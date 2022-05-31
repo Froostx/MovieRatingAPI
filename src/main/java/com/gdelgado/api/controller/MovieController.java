@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/RankingMovies/api")
+@RequestMapping("/RankingMovies")
 @RequiredArgsConstructor
 public class MovieController {
 

@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
