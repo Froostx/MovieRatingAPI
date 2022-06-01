@@ -20,7 +20,7 @@ public class MovieController {
     @Autowired
     private MoviesRepository moviesRepository;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity addMovie(@RequestBody @Valid Movie movie) {
         if(moviesRepository.existsByName(movie.getName())){
             movieService.updateMovie(movie);
@@ -29,14 +29,14 @@ public class MovieController {
         return ResponseEntity.status(201).build();
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity updateMovie(@RequestBody Movie movie) {
         movieService.updateMovie(movie);
         //Http status 200 = Ok
         return ResponseEntity.status(200).build();
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<Movie>> getAllMovies() {
         return ResponseEntity.ok(movieService.getAllMovies());
     }
@@ -46,7 +46,7 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMovieByName(name));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteMovie(@PathVariable String id) {
         movieService.deleteMovie(id);
         //Http status 204 = NO_CONTENT
