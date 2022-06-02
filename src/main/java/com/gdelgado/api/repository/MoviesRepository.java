@@ -12,4 +12,6 @@ public interface MoviesRepository extends MongoRepository<Movie, String> {
 
     Boolean existsByName(String name);
 
+    Long deleteByName(String name);
+
 }

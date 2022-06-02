@@ -36,8 +36,8 @@ public class MovieService {
         return moviesRepository.findAll();
     }
 
-    public void deleteMovie(String id) {
-        moviesRepository.deleteById(id);
+    public void deleteMovie(String name) {
+        moviesRepository.deleteByName(name);
     }
 
 }
