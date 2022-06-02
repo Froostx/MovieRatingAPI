@@ -18,8 +18,6 @@ import javax.validation.constraints.Max;
 @Document("Movies")
 public class Movie {
     @Id
-    private String id;
-
     @Indexed(unique = true)
     @Field("name")
     private String name;

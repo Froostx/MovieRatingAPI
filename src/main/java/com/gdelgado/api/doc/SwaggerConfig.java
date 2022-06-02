@@ -47,7 +47,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .title("Rating movies API doc")
                 .description("API that provides information about films and tv programs such as: Name, ranking from 0 to 10 and comment section." +
                         " Everything is stored in MongoDB documents.")
-                .contact(new Contact("Guillermo Delgado", "https://github.com/Froostx", "ge.delgado@icloud.com"))
+                .contact(new Contact("Guillermo Delgado", "https://github.com/Froostx/MovieRatingAPI", "ge.delgado@icloud.com"))
                 .version("1.0.0")
                 .build();
     }

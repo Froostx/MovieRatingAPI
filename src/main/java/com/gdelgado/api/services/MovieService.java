@@ -19,7 +19,7 @@ public class MovieService {
 
     public void updateMovie(Movie movie) {
         Movie savedMovie = moviesRepository.findByName(movie.getName()).orElseThrow(() -> new RuntimeException(String.format
-                ("Cannot Find Movie by ID %s", movie.getName())));
+                ("Cannot Find Movie by name", movie.getName())));
         savedMovie.setName(movie.getName());
         savedMovie.setRanking(movie.getRanking());
         savedMovie.setComments(movie.getComments());
@@ -29,7 +29,7 @@ public class MovieService {
 
     public Movie getMovieByName(String name) {
         return moviesRepository.findByName(name)
-                .orElseThrow(() -> new RuntimeException(String.format("Cannot find Movie by name - $s", name)));
+                .orElseThrow(() -> new RuntimeException(String.format("Cannot find Movie by name", name)));
     }
 
     public List<Movie> getAllMovies() {

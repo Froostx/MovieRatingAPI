@@ -3,9 +3,11 @@ package com.gdelgado.api.controller;
 import com.gdelgado.api.model.Movie;
 import com.gdelgado.api.repository.MoviesRepository;
 import com.gdelgado.api.services.MovieService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.StreamingHttpOutputMessage;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/movie")
 @RequiredArgsConstructor
+@Api(tags = "Services")
 public class MovieController {
 
     private final MovieService movieService;
@@ -24,7 +27,7 @@ public class MovieController {
     public ResponseEntity addMovie(@RequestBody @Valid Movie movie) {
         if(moviesRepository.existsByName(movie.getName())){
             movieService.updateMovie(movie);
-        }
+        }else moviesRepository.insert(movie);
         //Http status 201 = Created
         return ResponseEntity.status(201).build();
     }
@@ -46,9 +49,9 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMovieByName(name));
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity deleteMovie(@PathVariable String id) {
-        movieService.deleteMovie(id);
+    @DeleteMapping("/{name}")
+    public ResponseEntity deleteMovie(@PathVariable String name) {
+        movieService.deleteMovie(name);
         //Http status 204 = NO_CONTENT
         return ResponseEntity.status(204).build();
     }
