@@ -10,6 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
@@ -17,13 +19,18 @@ import javax.validation.constraints.Max;
 @NoArgsConstructor
 @Document("Movies")
 public class Movie {
+
+    @NotEmpty(message = "Movie name may not be empty")
     @Id
     @Indexed(unique = true)
     @Field("name")
     private String name;
-    @Max(value = 10, message = "Ranking should not be more than 10")
+
+    @Min(value = 0, message = "Ranking must not be less than 0")
+    @Max(value = 10, message = "Ranking must not be more than 10")
     @Field("ranking")
     private int ranking;
+
     @Field("comments")
     private String comments;
 }
