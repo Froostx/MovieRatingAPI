@@ -2,7 +2,9 @@ package com.gdelgado.api.services;
 
 import com.gdelgado.api.model.Movie;
 import com.gdelgado.api.repository.MoviesRepository;
+import com.mongodb.lang.Nullable;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
