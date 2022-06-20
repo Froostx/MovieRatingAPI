@@ -34,7 +34,7 @@ public class Movie {
     @Field("ranking")
     private int ranking;
 
-    @ApiModelProperty(notes = "Movie comments", example = "Awesome movie!", required = false)
+    @ApiModelProperty(notes = "Movie comments", example = "Awesome movie!")
     @Field("comments")
     private String comments;
 }
